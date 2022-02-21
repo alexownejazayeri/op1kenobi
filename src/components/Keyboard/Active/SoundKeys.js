@@ -3,7 +3,6 @@ import React from "react";
 const SoundKeys = () => {
   return (
     <React.Fragment>
-      {/* Start SoundKeys */}
       <div className="btn__base r3c9">
         <div className="btn">
           <div className="numbox">
@@ -88,7 +87,6 @@ const SoundKeys = () => {
           </div>
         </div>
       </div>
-      {/* End SoundKeys */}
     </React.Fragment>
   );
 };
