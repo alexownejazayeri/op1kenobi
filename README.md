@@ -13,5 +13,8 @@ This project makes use of [Shunya Koide's](https://codepen.io/shunyadezain) OP-1
 [ ] Traversing an array of objects to dynamically pull data into a component with functional methods e.g.(.filter(), .map())
 
 ## Next steps
-[] Pull SVG elements from the Teenage Engineering OP-1 tutorial and replace SCSS with interactive, animated SVG components.
-[] Create more options for sound libraries
+[ ] Pull SVG elements from the Teenage Engineering OP-1 tutorial and replace SCSS with interactive, animated SVG components
+[ ] Create more options for sound libraries
+[ ] Endow selector buttons with kit changing functionality
+[ ] Enable users to record short sessions, store in state, and allow for mp3 export
+[ ] Allow users to map keys to external .mp3 urls
