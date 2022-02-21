@@ -37,7 +37,6 @@ const whiteKeyIds = [
 const WhiteKeys = () => {
   const playSound = (url) => {
     var a = new Audio(url);
-    console.log(a);
     a.currentTime = 0;
     a.play();
   };
@@ -68,11 +67,11 @@ const WhiteKeys = () => {
 
   const pressOnHandler = (e) => {
     document.getElementById(e.target.id).className = "keys__white_pressed";
-    playSound(sound);
+    playSound(whiteKeyIds.filter((el) => e.target.id.toUpperCase() === el.id)[0]['sampleUrl']);
   };
 
   const pressOffHandler = (e) => {
-    document.getElementById(e.target.id).className = "keys__white";
+    document.getElementById(e.target.id.toUpperCase()).className = "keys__white";
   };
 
   return (
