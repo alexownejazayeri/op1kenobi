@@ -1,5 +1,5 @@
 import React from "react";
-import BlackKeys from "../../../media/boombap/black-keys/BlackKeys";
+import BlackKeys from "./BlackKeys";
 import WhiteKeys from "./WhiteKeys";
 
 const Keys = () => {
