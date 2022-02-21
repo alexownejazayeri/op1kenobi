@@ -1,0 +1,1453 @@
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@200&family=Jura:wght@300&family=Tulpen+One&display=swap");
+
+$mainColor: #d6d6de;
+$mainColorLight: #eaeaf2;
+$mainColorDark: #9194a3;
+$darkShadow: #201e25;
+$switchShadow: #595862;
+$greyLetter: #676d80;
+$black: #201e25;
+$white: #fefafb;
+$whiteLight: #ffffff;
+$whiteDark: #dedede;
+$blue: #8fc6f5;
+$blueLight: #acddfc;
+$blueDark: #4d9ed3;
+$green: #70d28a;
+$greenLight: #9af8c3;
+$greenDark: #29a14d;
+$orange: #fe813b;
+$orangeLight: #ffc484;
+$orangeDark: #e35129;
+$red: #f35271;
+$redDark: #614850;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #414141;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: "Catamaran", sans-serif;
+}
+
+.base {
+}
+
+$keyboardW: 505px;
+$keyboardH: 176px;
+$col: $keyboardW / 17;
+$row: $keyboardH / 6;
+$borderW: 1px;
+$borderR-key: 8px;
+$borderR-btn: 1.5px;
+
+@mixin absPosition($top, $left) {
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+@mixin gridPosition($rowPos, $colPos) {
+  grid-row: $rowPos;
+  grid-column: $colPos;
+}
+
+.op {
+  position: relative;
+  transform: scale(1.5) translateX(0px);
+
+  width: 550px;
+  height: 198px;
+  background: $mainColor;
+  border-radius: $borderR-key;
+  box-shadow: 0 -1px 2px -0.5px $mainColorDark inset,
+    2px 0 2px -0.5px $mainColorLight inset, 0 1px 1px $mainColorLight inset,
+    0px 25px 20px -15px rgba(0, 0, 0, 0.1),
+    10px 65px 50px -10px rgba(0, 0, 0, 0.05);
+
+  .fourDots {
+    position: absolute;
+    @include absPosition(13%, 97%);
+    display: grid;
+    grid-template-rows: 2px 2fr;
+    grid-template-columns: 2px 2px;
+    grid-gap: 2px;
+    .dot {
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: $greyLetter;
+    }
+  }
+
+  .fiveDots {
+    position: absolute;
+    @include absPosition(42%, 97%);
+
+    .dot {
+      width: 2px;
+      height: 2px;
+      margin-bottom: 3px;
+      border-radius: 50%;
+      background: $greyLetter;
+    }
+  }
+
+  .name {
+    position: absolute;
+    @include absPosition(75%, 95%);
+    transform: rotate(-90deg);
+    color: $greyLetter;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .keyboard {
+    position: absolute;
+    @include absPosition(50%, 50%);
+    margin-left: -12px;
+    width: $keyboardW;
+    height: $keyboardH;
+    background: $darkShadow;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr); //$row
+    grid-template-columns: repeat(34, 1fr);
+    grid-gap: 1px;
+    border: $borderW solid $darkShadow;
+    border-radius: 8px;
+    overflow: hidden;
+
+    > div {
+      border-radius: $borderR-btn;
+      background: linear-gradient(135deg, $mainColorLight 0%, $mainColor 25%);
+      box-shadow: 0 -1px 1px -1.5px $mainColorDark inset,
+        1px 0 1px -0.5px $mainColorLight inset, 0 1px 1px $mainColorLight inset;
+    }
+
+    .btn__base {
+      position: relative;
+      overflow: hidden;
+
+      .btn {
+        position: absolute;
+        @include absPosition(50%, 50%);
+        background: linear-gradient(135deg, $mainColorLight 0%, $mainColor 25%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        box-shadow: 0 -1px 1px -2px $mainColorDark inset,
+          1px 0 1px -0.5px $mainColorLight inset,
+          0 1px 1px $mainColorLight inset, 2px 2px 3px rgba(145, 148, 163, 0.6),
+          -2px -2px 3px rgba(234, 234, 242, 1);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .switch {
+      position: absolute;
+      @include absPosition(50%, 50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(
+        318.32deg,
+        $mainColorLight 0%,
+        $mainColor 25%
+      );
+    }
+
+    .speaker {
+      position: relative;
+      @include gridPosition(1 / span 2, 1 / span 4);
+      border-radius: $borderR-key $borderR-btn $borderR-btn $borderR-btn;
+      overflow: hidden;
+
+      .dots {
+        position: absolute;
+        @include absPosition(51%, 52%);
+
+        width: $col * 2 - 10px;
+        height: $row * 2 - 10px;
+        display: grid;
+        grid-template-rows: repeat(13, 1fr);
+        grid-template-columns: repeat(13, 1fr);
+
+        .dot {
+          width: 2px;
+          height: 2px;
+          border-radius: 50%;
+          background: $darkShadow;
+
+          &:nth-child(1),
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(11),
+          &:nth-child(12),
+          &:nth-child(13),
+          &:nth-child(14),
+          &:nth-child(26),
+          &:nth-child(27),
+          &:nth-child(39),
+          &:nth-child(131),
+          &:nth-child(143),
+          &:nth-child(144),
+          &:nth-child(156),
+          &:nth-child(157),
+          &:nth-child(158),
+          &:nth-child(159),
+          &:nth-child(167),
+          &:nth-child(168),
+          &:nth-child(169) {
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
+  .sw2 {
+    @include gridPosition(1, 5 / span 4);
+    overflow: hidden;
+    position: relative;
+
+    .switch {
+      background: $white;
+      border: 1px solid $switchShadow;
+      box-shadow: -1px -1px 1px -2px $whiteDark inset,
+        1px 0 1px -0.5px $whiteLight inset, 0 1px 1px $whiteLight inset,
+        2px 2px 3px 0.5px rgba(145, 148, 163, 0.7);
+      left: 25%;
+
+      .circle {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        margin-left: 10px;
+        margin-top: 2px;
+
+        box-shadow: 0 -1px 1px -2px $whiteDark inset,
+          1px 0 1px -0.5px $whiteDark inset, 0 1px 1px $mainColorLight inset;
+      }
+    }
+  }
+
+  .r2c3 {
+    @include gridPosition(2, 5 / span 2);
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .talkrect {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: $mainColor;
+        transform: rotate(45deg) translate(2px, 0px);
+        z-index: 5;
+      }
+
+      .talk {
+        position: relative;
+        display: block;
+        margin: 1.5em 0;
+        padding: 1px 3px;
+        height: 8px;
+        width: 12px;
+        background: $mainColor;
+        border: solid 1px $greyLetter;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+
+      .talk:after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        margin-left: -3px;
+        border: 4px solid transparent;
+        border-top: 4px solid $greyLetter;
+        z-index: 1;
+      }
+    }
+  }
+
+  .r2c4 {
+    @include gridPosition(2, 7 / span 2);
+    .met {
+      &__tri {
+        position: absolute;
+        @include absPosition(50%, 50%);
+        border-style: solid;
+        border-width: 0 3px 8px 3px;
+        border-color: transparent transparent $greyLetter transparent;
+
+        &:after {
+          content: "";
+          position: absolute;
+          @include absPosition(70%, 50%);
+          margin-top: 5px;
+          border-style: solid;
+          border-width: 0 2px 5px 2px;
+          border-color: transparent transparent $mainColor transparent;
+        }
+      }
+      &__pin {
+        position: absolute;
+        @include absPosition(40%, 65%);
+        .pin-line {
+          width: 5px;
+          height: 1px;
+          background: $greyLetter;
+          transform: rotate(-45deg) translate(-4px, 2px);
+          margin-top: 1px;
+        }
+
+        .pin-top {
+          width: 2px;
+          height: 2px;
+          border-radius: 50%;
+          background: $greyLetter;
+          transform: translate(2px, 1px);
+        }
+      }
+    }
+  }
+
+  ////////////DISPLAY///////////////////
+
+  .display {
+    @include gridPosition(1 / span 2, 9 / span 8);
+    background: $black !important;
+    // box-shadow: none !important;
+    position: relative;
+    overflow: hidden;
+
+    .glare {
+      position: absolute;
+      @include absPosition(-95%, -60%);
+      width: 100px;
+      height: 130px;
+      background: #fff;
+      opacity: 0.3;
+      transform: rotate(-65deg);
+      z-index: 100;
+    }
+
+    .rect__num {
+      position: absolute;
+      @include absPosition(18%, 8%);
+      width: 8px;
+      height: 8px;
+      border: #fff 1px solid;
+      &::after {
+        content: "4";
+        color: #fff;
+        position: absolute;
+        @include absPosition(-5px, 2px);
+        font-size: 10px;
+        transform: scale(0.8);
+        font-weight: bold;
+      }
+    }
+    .time {
+      position: absolute;
+      @include absPosition(8%, 44%);
+      color: #fff;
+      font-size: 10px;
+      font-family: "Tulpen One", cursive;
+      transform: scaleX(1.5);
+    }
+
+    .line__tapes {
+      .line__tapes__line1 {
+        position: absolute;
+        @include absPosition(50%, 25%);
+        transform: rotate(-43deg);
+        transform-origin: bottom center;
+        width: 1px;
+        height: 19px;
+        background: $greyLetter;
+      }
+      .line__tapes__line2 {
+        position: absolute;
+        @include absPosition(70%, 28%);
+        transform: rotate(73deg);
+        transform-origin: bottom center;
+        width: 1px;
+        height: 8px;
+        background: $greyLetter;
+      }
+      .line__tapes__line3 {
+        position: absolute;
+        @include absPosition(54%, 48%);
+        transform: rotate(-81deg);
+        transform-origin: bottom center;
+        width: 1px;
+        height: 17px;
+        background: $greyLetter;
+      }
+      .line__tapes__line4 {
+        position: absolute;
+        @include absPosition(54%, 50%);
+        transform: rotate(81deg);
+        transform-origin: bottom center;
+        width: 1px;
+        height: 17px;
+        background: $greyLetter;
+      }
+      .line__tapes__line5 {
+        position: absolute;
+        @include absPosition(68%, 72%);
+        transform: rotate(-81deg);
+        transform-origin: bottom center;
+        width: 1px;
+        height: 8px;
+        background: $greyLetter;
+      }
+      .line__tapes__line6 {
+        position: absolute;
+        @include absPosition(48%, 73%);
+        transform: rotate(33deg);
+        transform-origin: bottom center;
+        width: 1px;
+        height: 19px;
+        background: $greyLetter;
+      }
+    }
+
+    .center__line {
+      position: absolute;
+      @include absPosition(90%, 50%);
+      width: 1px;
+      height: 12px;
+      background: #fff;
+      z-index: 10;
+    }
+
+    .line__btm {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      @include absPosition(92%, 50%);
+      &__line {
+        width: 1px;
+        height: 3px;
+        background: $greyLetter;
+        margin: 9px;
+      }
+    }
+
+    .btm__color__line {
+      &__red {
+        position: absolute;
+        @include absPosition(97%, 50%);
+        width: 100px;
+        height: 1px;
+        background: $red;
+      }
+      &__blue {
+        position: absolute;
+        @include absPosition(97%, 50%);
+        width: 20px;
+        height: 1px;
+        background: $blue;
+      }
+      &__green {
+        position: absolute;
+        @include absPosition(94%, 60%);
+        width: 25px;
+        height: 1px;
+        background: $green;
+        z-index: 11;
+      }
+    }
+
+    .line__right {
+      &__line__btm {
+        position: absolute;
+        @include absPosition(50%, 93%);
+        width: 1px;
+        height: 40px;
+        background: $redDark;
+      }
+      &__line__top {
+        position: absolute;
+        @include absPosition(68%, 93%);
+        width: 1px;
+        height: 20px;
+        background: $red;
+        z-index: 10;
+      }
+
+      &__circle {
+        position: absolute;
+        @include absPosition(35%, 93%);
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: $red;
+        z-index: 5;
+      }
+    }
+
+    .repeat {
+      position: absolute;
+      @include absPosition(35%, 50%);
+      .rect {
+        position: absolute;
+        @include absPosition(10px, 0);
+        width: 12px;
+        height: 4px;
+        border: 1px solid $green;
+        border-radius: 100px;
+      }
+      .rect2 {
+        position: absolute;
+        @include absPosition(7px, -1px);
+        width: 5px;
+        height: 5px;
+        background: $black;
+      }
+      .tri {
+        position: absolute;
+        @include absPosition(7px, 0px);
+        border-style: solid;
+        border-width: 2px 3px 2px 0;
+        border-color: transparent $green transparent transparent;
+      }
+    }
+
+    .mid__lines {
+      position: absolute;
+      @include absPosition(35%, 50%);
+      display: flex;
+      align-items: center;
+      .mid__line {
+        width: 1px;
+        height: 2px;
+        &:nth-child(3) {
+          height: 4px;
+        }
+        background: #fff;
+        margin: 0 2px;
+      }
+    }
+
+    .left__circle {
+      position: absolute;
+      @include absPosition(83%, 36%);
+      width: 4px;
+      height: 4px;
+      border: 1px #fff solid;
+      border-radius: 50%;
+      &__dot {
+        position: absolute;
+        @include absPosition(2px, 35%);
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+      }
+    }
+
+    .right__circle {
+      position: absolute;
+      @include absPosition(83%, 64%);
+      width: 3px;
+      height: 3px;
+      border: 1px #fff solid;
+      border-radius: 50%;
+      //           &__line{
+      //           position: absolute;
+      //           @include absPosition(2px,1px);
+      //          width: 2px;
+      //           height: 1px;
+      //           background: #fff;
+      //           transform: rotate(-45deg);
+
+      //           }
+    }
+
+    .side__circle {
+      position: absolute;
+      @include absPosition(48px, 32px);
+      width: 2px;
+      height: 2px;
+      border: 1px #fff solid;
+      border-radius: 50%;
+    }
+
+    .side__circle2 {
+      position: absolute;
+      @include absPosition(46px, 85px);
+      width: 2px;
+      height: 2px;
+      border: 1px #fff solid;
+      border-radius: 50%;
+    }
+
+    .center__box {
+      position: absolute;
+      @include absPosition(80%, 50%);
+      width: 4px;
+      height: 3px;
+      border: 1px #fff solid;
+    }
+
+    .tapes {
+      .tapes__tape {
+        position: absolute;
+        @include absPosition(45%, 25%);
+        width: 28px;
+        height: 28px;
+        border: 1px #fff solid;
+        border-radius: 50%;
+        .three__circles {
+          .circle1 {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 7px;
+            height: 7px;
+            border: 1px #fff solid;
+            border-radius: 50%;
+          }
+          .circle2 {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 10px;
+            height: 10px;
+            border: 1px #fff solid;
+            border-radius: 50%;
+          }
+          .circle3 {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 1px;
+            height: 1px;
+            border: 1px #fff solid;
+            border-radius: 50%;
+          }
+        }
+        .three__lines {
+          .line1 {
+            position: absolute;
+            @include absPosition(18%, 50%);
+            width: 1px;
+            height: 5px;
+            background: #fff;
+          }
+          .line2 {
+            position: absolute;
+            @include absPosition(60%, 75%);
+            transform: rotate(120deg);
+            width: 1px;
+            height: 5px;
+            background: #fff;
+          }
+          .line3 {
+            position: absolute;
+            @include absPosition(60%, 23%);
+            transform: rotate(240deg);
+            width: 1px;
+            height: 5px;
+            background: #fff;
+          }
+        }
+      }
+      .tapes__tape__right {
+        position: absolute;
+        @include absPosition(45%, 75%);
+        width: 28px;
+        height: 28px;
+        border: 1px #fff solid;
+        border-radius: 50%;
+        .three__circles {
+          .circle__tape {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 17px;
+            height: 17px;
+            border: 1px $greyLetter solid;
+            border-radius: 50%;
+          }
+          .circle1 {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 7px;
+            height: 7px;
+            border: 1px #fff solid;
+            border-radius: 50%;
+          }
+          .circle2 {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 10px;
+            height: 10px;
+            border: 1px #fff solid;
+            border-radius: 50%;
+          }
+          .circle3 {
+            position: absolute;
+            @include absPosition(50%, 50%);
+            width: 1px;
+            height: 1px;
+            border: 1px #fff solid;
+            border-radius: 50%;
+          }
+        }
+        .three__lines {
+          .line1 {
+            position: absolute;
+            @include absPosition(18%, 50%);
+            width: 1px;
+            height: 5px;
+            background: #fff;
+          }
+          .line2 {
+            position: absolute;
+            @include absPosition(60%, 75%);
+            transform: rotate(120deg);
+            width: 1px;
+            height: 5px;
+            background: #fff;
+          }
+          .line3 {
+            position: absolute;
+            @include absPosition(60%, 23%);
+            transform: rotate(240deg);
+            width: 1px;
+            height: 5px;
+            background: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  //////////////DISPLAY///////////////////
+
+  .sw4 {
+    position: relative;
+    @include gridPosition(span 2, span 4);
+
+    @mixin switchColor($color, $colorLight, $colorDark) {
+      background: $color;
+      box-shadow: -1px -1px 0.5px -1.5px $colorDark inset,
+        1px 0 1px -0.5px $colorLight inset, 0 1px 1px $colorLight inset,
+        3px 3px 5px rgba(145, 148, 163, 0.5),
+        -3px -3px 5px rgba(234, 234, 242, 0.9);
+    }
+
+    .switch {
+      @include absPosition(50%, 50%);
+    }
+
+    &__1 .switch {
+      @include switchColor($blue, $blueLight, $blueDark);
+    }
+    &__2 .switch {
+      @include switchColor($green, $greenLight, $greenDark);
+    }
+    &__3 .switch {
+      @include switchColor($white, $whiteLight, $whiteDark);
+    }
+    &__4 .switch {
+      @include switchColor($orange, $orangeLight, $orangeDark);
+    }
+
+    &__shadow {
+      position: absolute;
+      @include absPosition(50%, 50%);
+      border: 1px solid $switchShadow;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    .switch__frame {
+      position: absolute;
+      @include absPosition(50%, 50%);
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+    }
+
+    &__1 .switch__frame {
+      background: $blue;
+    }
+    &__2 .switch__frame {
+      background: $green;
+    }
+    &__3 .switch__frame {
+      background: $white;
+    }
+    &__4 .switch__frame {
+      background: $orange;
+    }
+
+    .switch__rect {
+      position: absolute;
+      @include absPosition(50%, 50%);
+      width: 13px;
+      height: 5px;
+      border-radius: 50px;
+    }
+
+    @mixin insetShadow($light, $dark) {
+      opacity: 0.5;
+      box-shadow: inset 1px 1px 1px 0px $dark, inset -1px -1px 1px 0px $light;
+    }
+
+    &__1 .switch__rect {
+      @include insetShadow($blueLight, $blueDark);
+    }
+    &__2 .switch__rect {
+      @include insetShadow($greenLight, $greenDark);
+    }
+    &__3 .switch__rect {
+      @include insetShadow($whiteLight, $whiteDark);
+    }
+    &__4 .switch__rect {
+      @include insetShadow($orangeLight, $orangeDark);
+    }
+  }
+
+  .r1c17 {
+    @include gridPosition(1, 33 / span 2);
+    border-radius: $borderR-btn $borderR-key $borderR-btn $borderR-btn;
+    .pin {
+      .pin-line {
+        width: 7px;
+        height: 1px;
+        background: $orange;
+        transform: rotate(-45deg) translate(-2px, 1px);
+        margin-top: 1px;
+      }
+
+      .pin-top {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: $orange;
+        transform: translate(4px, -3px);
+      }
+    }
+  }
+
+  .r2c17 {
+    @include gridPosition(2, 33 / span 2);
+    .btm {
+      margin-top: -8px;
+    }
+  }
+
+  .r3c1 {
+    @include gridPosition(3, 1 / span 2);
+    .wave {
+      margin-right: 2px;
+      > div {
+        position: absolute;
+        display: block;
+        transform: scale(0.8) scaleX(0.5);
+        font-size: 10px;
+        color: $blue;
+        &:nth-child(1) {
+          transform: scale(0.8) scaleX(0.5) translate(-380%, -50%);
+        }
+        &:nth-child(2) {
+          transform: rotate(180deg) scale(0.8) scaleX(0.5) translate(180%, 70%);
+        }
+        &:nth-child(3) {
+          transform: scale(0.8) scaleX(0.5) translate(-120%, -50%);
+        }
+        &:nth-child(4) {
+          transform: rotate(180deg) scale(0.8) scaleX(0.5) translate(30%, 70%);
+        }
+        &:nth-child(5) {
+          transform: scale(0.8) scaleX(0.5) translate(30%, -50%);
+        }
+        &:nth-child(6) {
+          transform: rotate(180deg) scale(0.8) scaleX(0.5) translate(-380%, 70%);
+        }
+      }
+    }
+  }
+
+  .r3c2 {
+    @include gridPosition(3, 3 / span 2);
+    .mark {
+      &__1 {
+        position: absolute;
+        @include absPosition(50%, 50%);
+        font-size: 5px;
+        color: $green;
+      }
+      &__2 {
+        position: absolute;
+        @include absPosition(60%, 50%);
+        width: 1px;
+        height: 5px;
+        background: $green;
+      }
+    }
+  }
+
+  .r3c3 {
+    @include gridPosition(3, 5 / span 2);
+    .tape {
+      &__circle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        border: 1px solid $orange;
+        @include absPosition(54%, 35%);
+      }
+      &__circle__right {
+        position: absolute;
+        @include absPosition(54%, 70%);
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        border: 1px solid $orange;
+        z-index: 10;
+      }
+      &__line {
+        position: absolute;
+        @include absPosition(65%, 50%);
+        width: 7px;
+        height: 1px;
+        background: $orange;
+      }
+    }
+  }
+
+  .r3c4 {
+    @include gridPosition(3, 7 / span 2);
+    .fourLine {
+      display: flex;
+      transform: rotate(180deg);
+      .btn-line {
+        width: 1px;
+        &:nth-child(1) {
+          height: 6px;
+        }
+        &:nth-child(2) {
+          height: 4px;
+        }
+        &:nth-child(3) {
+          height: 8px;
+        }
+        &:nth-child(4) {
+          height: 6px;
+        }
+        background: $greyLetter;
+        margin-right: 2px;
+      }
+    }
+  }
+
+  .r3c5,
+  .r3c6,
+  .r3c7,
+  .r3c8 {
+    .btn {
+      .num {
+        font-family: "Jura", sans-serif;
+        color: $greyLetter;
+      }
+    }
+  }
+
+  .r3c5 {
+    @include gridPosition(3, 9 / span 2);
+  }
+  .r3c6 {
+    @include gridPosition(3, 11 / span 2);
+  }
+  .r3c7 {
+    @include gridPosition(3, 13 / span 2);
+  }
+  .r3c8 {
+    @include gridPosition(3, 15 / span 2);
+  }
+
+  .btn {
+    .numbox {
+      text-align: center;
+      .num {
+        font-family: "Tulpen One", cursive;
+        margin: 4px 0 -5px 0;
+        display: block;
+        transform: scale(0.8);
+        font-size: 10px;
+        color: $greyLetter;
+      }
+      .btm {
+        display: block;
+        transform: scale(0.5);
+        font-size: 10px;
+        color: $greyLetter;
+      }
+    }
+  }
+
+  .r3c9 {
+    @include gridPosition(3, 17 / span 2);
+    .btm {
+      color: $green !important;
+    }
+  }
+
+  .r3c10 {
+    @include gridPosition(3, 19 / span 2);
+    .btm {
+      color: $green !important;
+    }
+  }
+
+  .r3c11 {
+    @include gridPosition(3, 21 / span 2);
+    .num {
+      position: absolute;
+      @include absPosition(-10%, 45%);
+    }
+    .btm {
+      .rect {
+        position: absolute;
+        @include absPosition(10px, 0);
+        width: 12px;
+        height: 5px;
+        border: 1px solid $green;
+        border-radius: 25px;
+      }
+      .rect2 {
+        position: absolute;
+        @include absPosition(7px, 0);
+        width: 5px;
+        height: 5px;
+        background: $mainColor;
+      }
+      .tri {
+        position: absolute;
+        @include absPosition(7px, 2px);
+        border-style: solid;
+        border-width: 2px 3px 2px 0;
+        border-color: transparent $green transparent transparent;
+      }
+    }
+  }
+
+  .r3c12 {
+    @include gridPosition(3, 23 / span 2);
+    .num {
+      position: absolute;
+      @include absPosition(-10%, 40%);
+    }
+    .btm {
+      position: absolute;
+      @include absPosition(70%, 50%);
+
+      .tape {
+        &__circle {
+          position: absolute;
+          @include absPosition(2px, -4px);
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          border: 1px solid $orange;
+        }
+        &__circle__right {
+          position: absolute;
+          @include absPosition(2px, 4px);
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          border: 1px solid $orange;
+          z-index: 10;
+        }
+        &__line {
+          position: absolute;
+          @include absPosition(5px, 0);
+          width: 7px;
+          height: 1px;
+          background: $orange;
+        }
+      }
+    }
+  }
+
+  .r3c13 {
+    @include gridPosition(3, 25 / span 2);
+    .btm {
+      color: $orange !important;
+      padding-top: 0px;
+    }
+  }
+
+  .r3c14 {
+    @include gridPosition(3, 27 / span 2);
+    .btm {
+      .num {
+        position: absolute;
+      }
+      .orange__dots {
+        display: flex;
+        margin-left: 2px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        &__dot {
+          margin-right: 2px;
+          width: 2px;
+          height: 2px;
+          border-radius: 50%;
+          background: $orange;
+          &:nth-child(1) {
+            margin-right: 4px;
+            width: 4px;
+            height: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .r3c15 {
+    @include gridPosition(3, 29 / span 2);
+  }
+
+  .r3c16 {
+    @include gridPosition(3, 31 / span 2);
+  }
+
+  .r3c17 {
+    @include gridPosition(3, 33 / span 2);
+    .blue__dots {
+      display: flex;
+      margin-left: 2px;
+      .blue__dot {
+        margin-right: 2px;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        background: $blueDark;
+        &:nth-child(1) {
+          margin-right: 4px;
+        }
+        &:nth-child(2) {
+          position: absolute;
+          @include absPosition(35%, 40%);
+          background: $blueDark;
+        }
+      }
+    }
+  }
+
+  .r4c1 {
+    @include gridPosition(4, 1 / span 2);
+    .btn {
+      .btm {
+        padding-top: 10px;
+      }
+      .arrow {
+        margin-top: 10px;
+        position: relative;
+        .arrow-top {
+          position: absolute;
+          @include absPosition(50%, 20%);
+          width: 5px;
+          height: 5px;
+          border: 0px;
+          border-top: solid 1px $orange;
+          border-right: solid 1px $orange;
+          -ms-transform: rotate(-45deg);
+          -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+        }
+        .arrow-mid {
+          position: absolute;
+          @include absPosition(50%, 30%);
+          margin: 3px 0 0 0;
+          width: 4px;
+          height: 8px;
+          border: 0px;
+          border-right: solid 1px $orange;
+        }
+
+        .arrow-btm {
+          position: absolute;
+          @include absPosition(50%, 45%);
+          margin: 4px 0 0 0;
+          width: 10px;
+          height: 10px;
+          border: 0px;
+          border-bottom: solid 1px $orange;
+        }
+      }
+    }
+  }
+
+  .r4c2 {
+    @include gridPosition(4, 3 / span 2);
+    .btm {
+      position: absolute;
+      @include absPosition(120%, 45%);
+      margin-top: -10px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: $greyLetter;
+    }
+    .arrow {
+      margin-top: -11px;
+      position: relative;
+      transform: rotate(180deg) translateY(-10px);
+      .arrow-top {
+        position: absolute;
+        @include absPosition(50%, 50%);
+        width: 5px;
+        height: 5px;
+        border: 0px;
+        margin-top: 4px;
+        margin-left: -3px;
+        border-top: solid 1px $orange;
+        border-right: solid 1px $orange;
+        -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+      .arrow-mid {
+        position: absolute;
+        @include absPosition(50%, 50%);
+        margin: 7px 0 0 0;
+        width: 0;
+        height: 8px;
+        border: 0px;
+        border-right: solid 1px $orange;
+      }
+
+      .arrow-btm {
+        position: absolute;
+        @include absPosition(50%, 45%);
+        margin: -4px 0 0 0;
+        width: 10px;
+        height: 10px;
+        border: 0px;
+        border-bottom: solid 1px $orange;
+      }
+    }
+  }
+
+  .r4c3 {
+    @include gridPosition(4, 5 / span 2);
+    .sci {
+      color: $orange;
+      transform: rotate(180deg) translateY(-4px);
+    }
+    .btm {
+      margin-top: -3px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .r5c1 {
+    @include gridPosition(5, 1 / span 2);
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::after {
+        content: "";
+        background: $mainColor;
+        width: 5px;
+        height: 5px;
+        border-style: solid;
+        border-radius: 50%;
+        border-width: 5.8px;
+        border-color: $orange;
+      }
+    }
+  }
+
+  .r5c2 {
+    @include gridPosition(5, 3 / span 2);
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::after {
+        content: "";
+        margin: 1px 0 0 1px;
+        border-style: solid;
+        border-width: 4px 0 4px 6.9px;
+        border-color: transparent transparent transparent $greyLetter;
+      }
+    }
+  }
+
+  .r5c3 {
+    @include gridPosition(5, 5 / span 2);
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::after {
+        content: "";
+        width: 5px;
+        height: 5px;
+        margin: 1px 0 0 1px;
+        background: $greyLetter;
+      }
+    }
+  }
+
+  .r6c1 {
+    @include gridPosition(6, 1 / span 2);
+    border-radius: $borderR-btn $borderR-btn $borderR-btn $borderR-key;
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &::after {
+        content: "";
+        margin: 1px 0 0 2px;
+        width: 5px;
+        height: 5px;
+        border: 0px;
+        border-top: solid 1px $greyLetter;
+        border-right: solid 1px $greyLetter;
+        -ms-transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+      }
+    }
+  }
+
+  .r6c2 {
+    @include gridPosition(6, 3 / span 2);
+    .btn {
+      &::after {
+        content: "";
+        margin: 1px 2px 0 0;
+        width: 5px;
+        height: 5px;
+        border: 0px;
+        border-top: solid 1px $greyLetter;
+        border-right: solid 1px $greyLetter;
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .r6c3 {
+    @include gridPosition(6, 5 / span 2);
+    .btn {
+      .shift {
+        display: block;
+        transform: scale(0.6);
+        font-size: 10px;
+        color: $greyLetter;
+      }
+    }
+  }
+
+  //BLACK KEYS
+  .r4c4 {
+    @include gridPosition(4, 7 / span 3);
+  }
+  .r4c5 {
+    @include gridPosition(4, 10 / span 2);
+  }
+  .r4c6 {
+    @include gridPosition(4, 12 / span 3);
+  }
+  .r4c7 {
+    @include gridPosition(4, 15 / span 3);
+  }
+  .r4c8 {
+    @include gridPosition(4, 18 / span 3);
+  }
+  .r4c9 {
+    @include gridPosition(4, 21 / span 3);
+  }
+  .r4c10 {
+    @include gridPosition(4, 24 / span 2);
+  }
+  .r4c11 {
+    @include gridPosition(4, 26 / span 3);
+  }
+  .r4c12 {
+    @include gridPosition(4, 29 / span 3);
+  }
+  .r4c13 {
+    @include gridPosition(4, 32 / span 3);
+  }
+
+  @mixin blackKay {
+    &:after {
+      content: "";
+      background: $black;
+      width: 18px;
+      height: 18px;
+      border-radius: 50px;
+    }
+  }
+
+  .btn__base__mid {
+    @include blackKay;
+  }
+
+  .btn__base__left {
+    left: 65% !important;
+    @include blackKay;
+  }
+
+  .btn__base__right {
+    left: 35% !important;
+    @include blackKay;
+  }
+
+  .keys {
+    grid-row: span 2;
+    grid-column: span 2;
+    position: relative;
+
+    &__white {
+      position: absolute;
+      @include absPosition(50%, 50%);
+      background: linear-gradient(135deg, $mainColorLight 0%, $mainColor 25%);
+      width: 20px;
+      height: 50px;
+      border-radius: 50px;
+      box-shadow: 0 -1px 1px -2px $mainColorDark inset,
+        1px 0 1px -0.5px $mainColorLight inset, 0 1px 1px $mainColorLight inset,
+        2px 2px 3px rgba(145, 148, 163, 0.6),
+        -2px -2px 3px rgba(234, 234, 242, 1);
+    }
+
+    &:last-child {
+      border-radius: $borderR-btn $borderR-btn $borderR-key $borderR-btn;
+    }
+  }
+}
