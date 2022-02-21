@@ -119,7 +119,7 @@ const BlackKeys = () => {
   const pressOnHandlerBlack = (e) => {
       console.log(e);
     document.getElementById(e.target.id).className = "btn__pressed " + blackKeyIds.filter((el) => e.target.id === el.id)[0]['classInner2'];
-    playSound(sound);
+    playSound(blackKeyIds.filter((el) => e.target.id.toUpperCase() === el.id)[0]['sampleUrl']);
   };
 
   const pressOffHandlerBlack = (e) => {
